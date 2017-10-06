@@ -10,6 +10,7 @@ import java.util.Scanner;
 public class Retriever {
 	
 	Scanner scanner = new Scanner(System.in);
+	boolean found = false;
 
 	public Retriever() {
 		System.out.println("Enter an email id: ");
@@ -27,12 +28,14 @@ public class Retriever {
 				if(nameIndex != -1){
 					String shortenedString = htmlLine.substring(nameIndex + searchText.length(), htmlLine.length());
 					shortenedString = shortenedString.substring(0, shortenedString.indexOf("</h1>"));
-					System.out.println(htmlLine);
 					System.out.println(shortenedString);
+					found = true;
 				}
 			}
 			html.close();
-			System.out.println("No such id!");
+			if(!found) {
+				System.out.println("No such id!");
+			}
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
